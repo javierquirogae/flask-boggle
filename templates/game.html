@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<table>
+  
+    {% for i in range(5) %}
+        <tr>       
+        {% for l in board[i] %}
+            <td><div id="game">{{l}}</div></td>
+        {%  endfor %}
+        </tr>  
+    {%  endfor %}
+
+</table>
+
+
+{% endblock %}
