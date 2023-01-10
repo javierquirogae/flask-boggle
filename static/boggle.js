@@ -53,8 +53,12 @@ class BoggleGame {
         console.log(`${word} was entered`)
         if (!word) return;
     
-        if (this.words.has(word)) {
+        if (this.words.has(word.toLowerCase())) {
             this.showMessage(`Already found ${word}`, "err");
+            this.input_value = "";
+            $("#word").val(this.input_value);
+            $("div").removeClass("selected");
+            $word.val("").focus();
             return;
         }
     
@@ -74,6 +78,7 @@ class BoggleGame {
         }
         this.input_value = "";
         $("#word").val(this.input_value);
+        $("div").removeClass("selected");
         $word.val("").focus();
     }
   
@@ -103,6 +108,7 @@ class BoggleGame {
         this.input_value += targetID;
         // this.input.value = this.input_value;
         console.log(this.input_value)
+        $(evt.target).addClass("selected")
         $("#word").val(this.input_value);
     }
   
