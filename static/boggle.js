@@ -72,7 +72,8 @@ class BoggleGame {
             this.words.add(word.toLowerCase());
             this.showMessage(`Added: ${word}`, "ok");
         }
-    
+        this.input_value = "";
+        $("#word").val(this.input_value);
         $word.val("").focus();
     }
   
