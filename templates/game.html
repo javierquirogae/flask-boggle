@@ -1,18 +1,46 @@
 {% extends 'base.html' %}
 {% block content %}
+<section id="boggle">
+    <p>High Score: 
+        <b>{{ highscore }}</b> 
+        in {{ nplays }} plays &emsp;  <a href="/">Shuffle and reset !</a>
+    </p>
+    
+    <p>
+        Score: <b class="score">0</b> &emsp; 
+        Seconds Left: <b class="timer"></b><br>
+        
+    </p>
 
-
-<table>
-  
-    {% for i in range(5) %}
-        <tr>       
-        {% for l in board[i] %}
-            <td><div id="game">{{l}}</div></td>
+    <table class="board">
+        <tbody>
+        {% for i in range(5) %}
+            <tr>       
+            {% for l in board[i] %}
+                <td><div class="game" id={{l}}>{{l}}</div></td>
+            {%  endfor %}
+            </tr>  
         {%  endfor %}
-        </tr>  
-    {%  endfor %}
+        </tbody>
+    </table>
 
-</table>
+    <form method="POST" class="add-word">
+        <input id="word" name="word" class="word" type="text" value="">
+        <button>GUESS</button>
+    </form>
 
+    <!-- <p class="this_word">
+   
+    </p> -->
+
+    <p class="msg">
+   
+    </p>
+
+    <p class="words">
+        <!-- our JS will words here as they score -->   
+    </p>
+
+</section>
 
 {% endblock %}

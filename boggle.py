@@ -1,6 +1,7 @@
 """Utilities related to Boggle game."""
 
 from random import choice
+from math import factorial as f
 import string
 
 
@@ -20,27 +21,40 @@ class Boggle():
 
     def make_board(self):
         """Make and return a random boggle board."""
-
+        boggle_letters = string.ascii_uppercase + 'AEIOUY'*2 + 'ETAIONSHR'*4
+        print(len(boggle_letters))
         board = []
 
         for y in range(5):
-            row = [choice(string.ascii_uppercase) for i in range(5)]
+            row = [choice(boggle_letters) for i in range(5)]
             board.append(row)
 
         return board
 
+
+    def is_not_valid(self, word):
+        if word.lower()[-1] == 's' and len(word) > 3:
+            singular_word = word.lower()[:-1]
+            print(word)
+            print(singular_word)
+            if singular_word in self.words:
+                return False
+        elif word.lower() in self.words:
+            return False
+        return True
+    
+
     def check_valid_word(self, board, word):
         """Check if a word is a valid word in the dictionary and/or the boggle board"""
-
-        word_exists = word in self.words
-        valid_word = self.find(board, word.upper())
-
-        if word_exists and valid_word:
-            result = "ok"
-        elif word_exists and not valid_word:
-            result = "not-on-board"
+    
+        if self.is_not_valid(word) or len(word) < 2:
+                result = "not-a-valid-word"
+        # We only check the board if we have a valid Boggle word !!
         else:
-            result = "not-a-word"
+            if not self.find(board, word.upper()):
+                result = "not-found-on-board"
+            else:
+                result = "ok"
 
         return result
 
