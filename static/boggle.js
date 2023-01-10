@@ -6,7 +6,7 @@ class BoggleGame {
     constructor(boardId, secs = 180) {
         this.secs = secs; // game length
         this.showTimer();
-        console.log(boardId)
+      
         this.score = 0;
         this.words = new Set();
         this.board = $("#" + boardId);
@@ -50,7 +50,7 @@ class BoggleGame {
         const $word = $(".word", this.board);
         
         let word = $word.val().trim();
-        console.log(`${word} was entered`)
+    
         if (!word) return;
     
         if (this.words.has(word.toLowerCase())) {
@@ -104,10 +104,9 @@ class BoggleGame {
     async handleClick(evt) {
         let target = evt.target;
         let targetID = target.id;
-        console.log(targetID)
+    
         this.input_value += targetID;
-        // this.input.value = this.input_value;
-        console.log(this.input_value)
+     
         $(evt.target).addClass("selected")
         $("#word").val(this.input_value);
     }

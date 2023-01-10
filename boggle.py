@@ -22,7 +22,7 @@ class Boggle():
     def make_board(self):
         """Make and return a random boggle board."""
         boggle_letters = string.ascii_uppercase + 'AEIOUY'*2 + 'ETAIONSHR'*4
-        print(len(boggle_letters))
+       
         board = []
 
         for y in range(5):
@@ -35,8 +35,6 @@ class Boggle():
     def is_not_valid(self, word):
         if word.lower()[-1] == 's' and len(word) > 3:
             singular_word = word.lower()[:-1]
-            print(word)
-            print(singular_word)
             if singular_word in self.words:
                 return False
         elif word.lower() in self.words:
