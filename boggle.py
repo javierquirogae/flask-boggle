@@ -21,12 +21,12 @@ class Boggle():
 
     def make_board(self):
         """Make and return a random boggle board."""
-        boggle_letters = string.ascii_uppercase + 'AEIOUY'*2 + 'ETAIONSHR'*4
+        boggle_letters = 'E'*26 + 'S'*25 + 'I'*24 + 'A'*23 + 'R'*22 + 'N'*21 + 'T'*20 + 'O'*19 + 'L'*18 + 'C'*17 + 'D'*16 + 'U'*15 + 'G'*14 + 'P'*13 + 'M'*12 + 'H'*11 + 'B'*10 + 'Y'*9 + 'F'*8 + 'V'*7 + 'K'*6 + 'W'*5 + 'Z'*4 + 'X'*3 + 'J'*2 + 'Q'*1
        
         board = []
 
-        for y in range(5):
-            row = [choice(boggle_letters) for i in range(5)]
+        for y in range(6):
+            row = [choice(boggle_letters) for i in range(6)]
             board.append(row)
 
         return board
@@ -35,7 +35,7 @@ class Boggle():
     def is_not_valid(self, word):
         if word.lower()[-1] == 's' and len(word) > 3:
             singular_word = word.lower()[:-1]
-            if singular_word in self.words:
+            if (singular_word in self.words) or (word in self.words):
                 return False
         elif word.lower() in self.words:
             return False
@@ -59,7 +59,7 @@ class Boggle():
     def find_from(self, board, word, y, x, seen):
         """Can we find a word on board, starting at x, y?"""
 
-        if x > 4 or y > 4:
+        if x > 5 or y > 5:
             return
 
         # This is called recursively to find smaller and smaller words
@@ -108,7 +108,7 @@ class Boggle():
             if self.find_from(board, word[1:], y - 1, x, seen):
                 return True
 
-        if y < 4:
+        if y < 5:
             if self.find_from(board, word[1:], y + 1, x, seen):
                 return True
 
@@ -116,7 +116,7 @@ class Boggle():
             if self.find_from(board, word[1:], y, x - 1, seen):
                 return True
 
-        if x < 4:
+        if x < 5:
             if self.find_from(board, word[1:], y, x + 1, seen):
                 return True
 
@@ -125,15 +125,15 @@ class Boggle():
             if self.find_from(board, word[1:], y - 1, x - 1, seen):
                 return True
 
-        if y < 4 and x < 4:
+        if y < 5 and x < 5:
             if self.find_from(board, word[1:], y + 1, x + 1, seen):
                 return True
 
-        if x > 0 and y < 4:
+        if x > 0 and y < 5:
             if self.find_from(board, word[1:], y + 1, x - 1, seen):
                 return True
 
-        if x < 4 and y > 0:
+        if x < 5 and y > 0:
             if self.find_from(board, word[1:], y - 1, x + 1, seen):
                 return True
         # Couldn't find the next letter, so this path is dead
@@ -146,8 +146,8 @@ class Boggle():
         # Find starting letter --- try every spot on board and,
         # win fast, should we find the word at that place.
 
-        for y in range(0, 5):
-            for x in range(0, 5):
+        for y in range(0, 6):
+            for x in range(0, 6):
                 if self.find_from(board, word, y, x, seen=set()):
                     return True
 

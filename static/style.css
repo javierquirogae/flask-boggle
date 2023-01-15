@@ -29,5 +29,12 @@
     background-color: rgb(6, 4, 18);
     border-radius: 50%;
   }
+  button{
+    margin-left: 230px;
+  }
+  .done{
+    background-color: rgb(0, 0, 0);
+    
+  }
 
  

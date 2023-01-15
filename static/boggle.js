@@ -6,7 +6,7 @@ class BoggleGame {
     constructor(boardId, secs = 180) {
         this.secs = secs; // game length
         this.showTimer();
-      
+        this.changeBackgroud();
         this.score = 0;
         this.words = new Set();
         this.board = $("#" + boardId);
@@ -19,7 +19,7 @@ class BoggleGame {
     
         $(".add-word", this.board).on("submit", this.handleSubmit.bind(this));
         $("tbody", this.board).on("click", this.handleClick.bind(this));
-       
+        this.changeBackgroud()
     }
   
     /* show word in list of words */
@@ -86,6 +86,10 @@ class BoggleGame {
   
     showTimer() {
       $(".timer", this.board).text(this.secs);
+    
+    }
+    changeBackgroud(){
+      $("body,html").toggleClass("done");
     }
   
     /* Tick: handle a second passing in game */
@@ -96,7 +100,11 @@ class BoggleGame {
   
       if (this.secs === 0) {
         clearInterval(this.timer);
+        
         await this.scoreGame();
+        this.changeBackgroud();
+        
+        
       }
     }
  

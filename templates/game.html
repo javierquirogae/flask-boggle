@@ -14,7 +14,7 @@
 
     <table class="board">
         <tbody>
-        {% for i in range(5) %}
+        {% for i in range(6) %}
             <tr>       
             {% for l in board[i] %}
                 <td><div class="game" id={{l}}>{{l}}</div></td>
@@ -25,7 +25,7 @@
     </table>
 
     <form method="POST" class="add-word">
-        <input id="word" name="word" class="word" type="text" autofocus>
+        <input id="word" name="word" class="word" type="text" autofocus><br><br>
         <button>GUESS</button>
     </form>
 
